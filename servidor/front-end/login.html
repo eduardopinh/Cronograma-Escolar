@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <h1>Conecte-se</h1>
+
+    <form id="loginForm">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <div></div>
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required>
+        <div></div>
+        <label for="turmaSelect">Selecione sua turma:</label>
+        <div></div>
+        <select id="turmaSelect" name="turmaSelect" required>
+            <option value="1A">100</option>
+            <option value="1B">101</option>
+            <option value="1C">102</option>
+            <option value="2A">200 ADM</option>
+            <option value="2B">201 ADM</option>
+            <option value="2C">200 REDES</option>
+            <option value="2D">200 INFORMATICA</option>
+            <option value="3A">300 CHL</option>
+            <option value="3B">300 SEA</option>
+            <option value="3C">300 CNS</option>
+        </select>
+        <div></div>
+        <label>
+            <input type="checkbox" id="rememberMe" name="rememberMe">
+            Lembrar-me
+        </label>
+        <div></div>
+        <p>Ao fazer login, você concorda com nossos <a href="terms.html">Termos de Serviço</a> e <a href="privacy.html">Política de Privacidade</a>.</p>
+        <button type="submit">Entrar</button>
+    </form>
+
+    <p>Não tem uma conta? <a href="register.html">Registre-se aqui</a>.</p>
+    <p>Esqueceu sua senha? <a href="reset-password.html">Redefina sua senha</a>.</p>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const turma = document.getElementById('turmaSelect').value;
+
+            try {
+                const response = await fetch("http://localhost:3000/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert("Login realizado com sucesso!\nBem-vindo " + data.user.username);
+                    // Redireciona para a home, se desejar
+                    window.location.href = "home.html";
+                } else {
+                    alert("Erro no login: " + data.message);
+                }
+            } catch (error) {
+                console.error("Erro ao conectar com o servidor:", error);
+                alert("Erro de conexão com o servidor.");
+            }
+        });
+    </script>
+</body>
+</html>

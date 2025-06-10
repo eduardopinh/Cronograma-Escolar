@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Bem Vindo ao Cronograma do Paulo VI</h1>
+    <p>Aqui você poderá acompanhar todo o conteudo passado pelos professores</p>
+    <button id="myButton">Faça o login</button>
+    <p>Para acessar o cronograma, você precisa fazer o login.</p>
+    <p>Se você não tem uma conta, <a href="register.html">clique aqui para se registrar</a>.</p>
+    <p>Se você esqueceu sua senha, <a href="reset-password.html">clique aqui para redefinir sua senha</a>.</p>
+
+    <script>
+        document.getElementById('myButton').addEventListener('click', function() {
+            alert('Button was clicked!');
+        });
+        document.getElementById('myButton').addEventListener('click', function() {
+            window.location.href = 'login.html'; // Redireciona para a página de login
+        });
+        document.getElementById('myButton').addEventListener('click', function() {
+            console.log('Button clicked!');
+        });
+    </script>
+</body>
+</html>
